@@ -1,0 +1,101 @@
+/* ==========================================================================
+   OMNIA 2.0 — Scoped Upgrade Styles (Accessibility, Discovery, Handoff, Status)
+   Strictly scoped to new upgrade components and non-intrusive a11y enhancements.
+   ========================================================================== */
+
+/* 1. Accessible Keyboard Focus Indicators (non-intrusive, keyboard-only) */
+:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+
+.cat-card:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+  border-color: rgba(129, 140, 248, 0.7);
+}
+
+/* 2. Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 3. Touch-Target Comfort on Mobile / Coarse Pointers (scoped to upgrade & header controls) */
+@media (pointer: coarse) {
+  .omnia-upgrade-btn,
+  .omnia-filter-pill,
+  #omnia-handoff-trigger,
+  #omnia-status-pill {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}
+
+/* 4. Homepage Compact Card View (only active when user enables compact mode) */
+.omnia-cards-compact .cat-card {
+  padding: 0.75rem !important;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.omnia-cards-compact .cat-card > div:first-child {
+  margin-bottom: 0 !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  flex-shrink: 0;
+}
+
+.omnia-cards-compact .cat-card p {
+  display: none;
+}
+
+.omnia-cards-compact .cat-card h3 {
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+
+/* 5. Hidden Homepage Card (user customization) */
+.omnia-card-hidden-by-filter,
+.omnia-card-hidden-by-user {
+  display: none !important;
+}
+
+/* 6. Upgrade Toolbar & Status Drawer Scoped Styling */
+.omnia-discovery-bar {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.55);
+}
+
+html:not(.dark) .omnia-discovery-bar {
+  border-color: rgba(15, 23, 42, 0.1);
+  background: rgba(241, 245, 249, 0.85);
+}
+
+.omnia-filter-pill {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.omnia-filter-pill[aria-pressed="true"] {
+  background-color: #4f46e5;
+  color: #ffffff;
+  border-color: #6366f1;
+}
+
+/* 7. Screen-reader utility (if not already present) */
+.omnia-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
